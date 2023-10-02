@@ -1,11 +1,14 @@
 # MGNestedGroups PowerShell Module
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/randriksen/MGNestedGroups)
-![GitHub](https://img.shields.io/github/license/randriksen/MGNestedGroups)
-
 **MGNestedGroups** is a PowerShell module that provides functions for working with nested groups in Azure Active Directory (Azure AD) and EntraID. This module allows you to apply licenses to all subgroups with user members of a specified group, get all subgroups with user members of a specified group, add all subgroups with user members as users of an enterprise application, and more.
 
+## Installation
 
+You can install this module directly from the [PowerShell Gallery](https://www.powershellgallery.com/packages/MGNestedGroups/1.0.0) using the following command:
+
+```powershell
+Install-Module -Name MGNestedGroups -Scope CurrentUser
+```
 
 ## Usage
 Here are some examples of how to use the functions provided by this module:
