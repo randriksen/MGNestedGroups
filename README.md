@@ -27,7 +27,9 @@ Add-MGSubgroupsToEnterpriseApp -EnterpriseAppId "YourAppId" -TopGroupName "TopGr
 Remove-MGSubgroupsFromEnterpriseApp -EnterpriseAppId "YourAppId" -TopGroupName "TopGroup"
 ```
 
-
+## Changelog
+- Version 1.0.3:
+    - Improved the efficiency of the Get-MGSubgroups function.
 
 ## Contributing
 Contributions are welcome! If you would like to contribute to this project

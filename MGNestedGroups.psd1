@@ -12,7 +12,7 @@
 # RootModule = ''
 
 # Version number of this module.
-ModuleVersion = '1.0.1'
+ModuleVersion = '1.0.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -49,6 +49,12 @@ PowerShellVersion = '5.1'
 
 # Processor architecture (None, X86, Amd64) required by this module
 # ProcessorArchitecture = ''
+
+# Changelog for this module
+ReleaseNotes = @'
+Version 1.0.3:
+- Improved the efficiency of the Get-MGSubgroups function.
+'@
 
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(@{ModuleName = 'Microsoft.Graph.Users'; ModuleVersion = '2.6.1'; }, 

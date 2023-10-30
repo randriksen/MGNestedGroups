@@ -21,33 +21,32 @@ function Get-MGSubgroups {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
-        [string]$GroupId
+        [string]$GroupId  # The ID of the group to check
     )
 
-    $group = Get-MgGroup -GroupId $GroupId
-    $groups = @()
+    $group = Get-MgGroup -GroupId $GroupId  # Get the group details
+    $groups = @()  # Initialize an empty array to store groups with user members
 
     if ($group) {
-        $subs = Get-MgGroupMember -GroupId $group.Id
-
+        $subs = Get-MgGroupMember -GroupId $group.Id -All  # Get all members of the group, including users and other groups
+    
         foreach ($sub in $subs) {
-            $subDetails = Get-MgUser -UserId $sub.Id -ErrorAction SilentlyContinue
-
-            if ($subDetails) {
-                # If $sub is a user, add it to the list of groups
+            if ($sub.AdditionalProperties["@odata.type"] -eq "#microsoft.graph.user") {
+                # If $sub is a user, add the current group to the list of groups with user members
                 $groups += $group
             }
-            else {
-                # If $sub is a group, recursively get subgroups
-                $subGroupDetails = Get-MgGroup -GroupId $sub.Id -ErrorAction SilentlyContinue
+            elseif ($sub.AdditionalProperties["@odata.type"] -eq "#microsoft.graph.group") {
+                # If $sub is a group, recursively get subgroups with user members
+            
+                $subGroupDetails = Get-MgGroup -GroupId $sub.Id -ErrorAction SilentlyContinue  # Get the details of the subgroup
 
                 if ($subGroupDetails) {
-                    $groups += Get-MGSubgroups -GroupId $sub.Id  # Recursively call the function
+                    $groups += Get-MGSubgroups -GroupId $sub.Id  # Recursively call the function to get subgroups with user members
                 }
             }
         }
     }
-    
+
     # Select and return unique group display names and IDs
     $groups = $groups | Select-Object DisplayName, Id | Get-Unique -AsString
     return $groups
